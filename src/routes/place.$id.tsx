@@ -1,7 +1,7 @@
 import { createFileRoute, Link, useNavigate, notFound } from "@tanstack/react-router";
 import { ArrowLeft, Heart, Share2, Wifi, Plug, Volume2, Users, Clock, MapPin, Sparkles, TicketPercent } from "lucide-react";
 import { AppShell } from "@/components/app-shell";
-import { getPlace } from "@/lib/mock-places";
+import { getPlace, type Place } from "@/lib/mock-places";
 import { useFavorites } from "@/lib/use-favorites";
 
 export const Route = createFileRoute("/place/$id")({
@@ -20,7 +20,7 @@ export const Route = createFileRoute("/place/$id")({
 });
 
 function PlaceDetail() {
-  const { place } = Route.useLoaderData();
+  const { place } = Route.useLoaderData() as { place: Place };
   const { has, toggle } = useFavorites();
   const navigate = useNavigate();
   const fav = has(place.id);

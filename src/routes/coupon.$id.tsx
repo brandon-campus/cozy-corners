@@ -1,7 +1,7 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { ArrowLeft, Check, Copy, TicketPercent } from "lucide-react";
 import { AppShell } from "@/components/app-shell";
-import { getPlace } from "@/lib/mock-places";
+import { getPlace, type Place } from "@/lib/mock-places";
 import { useState } from "react";
 
 export const Route = createFileRoute("/coupon/$id")({
@@ -20,7 +20,7 @@ export const Route = createFileRoute("/coupon/$id")({
 });
 
 function Coupon() {
-  const { place } = Route.useLoaderData();
+  const { place } = Route.useLoaderData() as { place: Place };
   const [copied, setCopied] = useState(false);
 
   const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?data=${encodeURIComponent(
